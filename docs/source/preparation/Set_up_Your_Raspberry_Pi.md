@@ -52,7 +52,7 @@ If you’re a Windows user, you can use Windows PowerShell to login Raspberry Pi
 
 If the terminal prompts **Ping request could not find host `<hostname>.local`**, it is possible that the Raspberry Pi failed to connect to the network. Please check the network.
 
-If you really can't ping **`<hostname>.local`**, try to [get_ip](#get_ip) and **ping `<IP address>`** instead. (e.g., **`ping 192.168.6.116`**)
+If you really can't ping **`<hostname>.local`**, try to [get_ip](#get_ip) and **ping `<IP address>`** instead. (e.g., **`ping 192.168.2.118`**)
 
 If multiple prompts like **"Reply from `<IP address>`: bytes=32 time<1ms TTL=64"** appear, it means your computer can access the Raspberry Pi.
 
