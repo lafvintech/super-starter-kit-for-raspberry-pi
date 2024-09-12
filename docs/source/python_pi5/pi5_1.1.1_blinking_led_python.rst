@@ -54,7 +54,7 @@ Connect
 
 **Step 1:** Build the circuit.
 
-.. image:: ../python_pi5/img/Connect/1.1.1.png
+.. image:: ../python_pi5/img/connect/1.1.1.png
     :width: 800
     :align: center
 

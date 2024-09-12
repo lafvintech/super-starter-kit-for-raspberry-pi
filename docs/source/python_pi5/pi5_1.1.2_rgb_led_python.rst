@@ -39,7 +39,7 @@ Connect
 
 **Step 1:** Build the circuit.
 
-.. image:: ../python_pi5/img/Connect/1.1.2.png
+.. image:: ../python_pi5/img/connect/1.1.2.png
 
 **Step 2:** Open the code file.
 
