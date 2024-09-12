@@ -42,7 +42,7 @@ Connect
 
 .. code-block::
 
-    cd ~/super-starter-kit-for-raspberry-pi/python-pi5/python-pi5
+    cd ~/super-starter-kit-for-raspberry-pi/python-pi5
 
 **Step 3:** Run the executable file.
 
