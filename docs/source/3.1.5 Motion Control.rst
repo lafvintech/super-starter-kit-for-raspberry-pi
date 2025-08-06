@@ -1,0 +1,56 @@
+
+
+# 3.1.5 Motion Control
+
+## Introduction
+
+In this lesson, we will make a simple motion sensing and controlling device. The MPU6050 is used as a sensor and the stepper motor as a controlled device. With the MPU6050 mounted on the glove, you can control the stepper motor by rotating your wrist.
+
+## Components
+
+![](./img/list/list_Motion_Control.png)
+
+## Connect
+
+| T-Board Name | physical | wiringPi | BCM  |
+| ------------ | -------- | -------- | ---- |
+| GPIO18       | Pin 12   | 1        | 18   |
+| GPIO23       | Pin 16   | 4        | 23   |
+| GPIO24       | Pin 18   | 5        | 24   |
+| GPIO25       | Pin 22   | 6        | 25   |
+| SDA1         | Pin 3    |          |      |
+| SCL1         | Pin 5    |          |      |
+
+![](./img/Schematic_three_one6.png)
+
+![](./img/connect/3.1.5.png)
+
+## Code
+
+### For  C  Language User
+
+Go to the code folder compile and run.
+
+```sh
+cd ~/super-starter-kit-for-raspberry-pi/c/3.1.5/
+gcc 3.1.5_MotionControl.c -lwiringPi -lm
+sudo ./a.out
+```
+As the code runs, if the tilt angle of **mpu6050** on the Y-axis is larger than **45** ℃, the stepper motor rotates anticlockwise; if less than **-45** ℃, the stepper motor rotates clockwise.
+
+<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
+    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.5_MotionControl.c`or`nano 3.1.5_MotionControl.py`
+</div>
+
+### For Python Language User
+
+```python
+cd ~/super-starter-kit-for-raspberry-pi/Python/
+python 3.1.5_MotionControl.py
+```
+
+As the code runs, if the tilt angle of **mpu6050** on the Y-axis is larger than **45** ℃, the stepper motor rotates anticlockwise; if less than **-45** ℃, the stepper motor rotates clockwise.
+
+## Phenomenon
+
+![](./img/phenomenon/315.jpg)

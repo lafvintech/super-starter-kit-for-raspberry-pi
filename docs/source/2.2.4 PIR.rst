@@ -1,0 +1,88 @@
+==========
+2.2.4 PIR
+==========
+
+Introduction
+------------
+
+In this project, we will make a device by using the human body infrared pyroelectric sensors. When someone gets closer to the LED, the LED will turn on automatically. If not, the light will turn off. This infrared motion sensor is a kind of sensor that can detect the infrared emitted by human and animals.
+
+Components
+----------
+
+.. image:: ./img/list/list_2.2.4_pir.png
+
+The PIR sensor detects infrared heat radiation that can be used to detect the presence of organisms that emit infrared heat radiation.
+The PIR sensor is split into two slots that are connected to a differential amplifier. Whenever a stationary object is in front of the sensor, the two slots receive the same amount of radiation and the output is zero. Whenever a moving object is in front of the sensor, one of the slots receives more radiation than the other , which makes the output fluctuate high or low. This change in output voltage is a result of detection of motion.
+
+.. image:: ./img/image211.png
+
+After the sensing module is wired, there is a one-minute initialization. During the initialization, module will output for 0~3 times at intervals. Then the module will be in the standby mode. Please keep the interference of light source and other sources away from the surface of the module so as to avoid the misoperation caused by the interfering signal. Even you'd better use the module without too much wind, because the wind can also interfere with the sensor.
+
+.. image:: ./img/image212.png
+
+**Distance Adjustment**
+
+Turning the knob of the distance adjustment potentiometer clockwise, the range of sensing distance increases, and the maximum sensing distance range is about 0-7 meters. If turn it anticlockwise, the range of sensing distance is reduced, and the minimum sensing distance range is about 0-3 meters.
+
+**Delay adjustment**
+
+Rotate the knob of the delay adjustment potentiometer clockwise, you can also see the sensing delay increasing. The maximum of the sensing elay can reach up to 300s. On the contrary, if rotate it anticlockwise, you can shorten the delay with a minimum of 5s.
+
+Two trigger modes: (choosing different modes by using the jumper cap).
+
+- **H:** **Repeatable trigger mode**, after sensing the human body, the module outputs high level. During the subsequent delay period, if somebody enters the sensing range,the output will keep being the high level.
+- **L:** **Non-repeatable trigger mode**, outputs high level when it senses the human body. After the delay, the output will change from high level into low level automatically.
+
+Connect
+-------
+
+.. image:: ./img/image327.png
+
+.. image:: ./img/connect/2.2.4.png
+
+.. note::
+    The PIR sensor will have a one-minute initialization time after powering on. During this period, infrared signals should be avoided, otherwise the measurement may be inaccurate.
+
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~~~
+
+Go to the code folder compile and run.
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/c/2.2.4/
+   gcc 2.2.4_PIR.c -lwiringPi
+   sudo ./a.out
+
+After the code runs, PIR detects surroundings and let RGB LED glow yellow if it senses someone walking by. There are two potentiometers on the PIR module: one is to adjust sensitivity and the other is to adjust the detection distance. To make the PIR module work better, you You need to turn both of them counterclockwise to the end.
+
+.. image:: ./img/PIR_TTE.png
+
+This is the complete code
+
+.. code-block:: c
+
+   xxxx
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/python
+   python 2.2.4_PIR.py
+
+After the code runs, PIR detects surroundings and let RGB LED glow yellow if it senses someone walking by. There are two potentiometers on the PIR module: one is to adjust sensitivity and the other is to adjust the detection distance. To make the PIR module work better, you You need to turn both of them counterclockwise to the end.
+
+.. code-block:: python
+
+   xxxx
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/224.jpg

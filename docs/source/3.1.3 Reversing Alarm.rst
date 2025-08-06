@@ -1,0 +1,65 @@
+
+
+# 3.1.3 Reversing Alarm
+
+## Introduction
+
+In this project, we will use LCD, buzzer and ultrasonic sensors to make a reverse assist system. We can put it on the remote control vehicle to simulate the actual process of reversing the car into the garage.
+
+## Components
+
+![](./img/list/list_Reversing_Alarm.png)
+
+Ultrasonic sensor detects the distance between itself and the obstacle that will be displayed on the LCD in the form of code. At the same time, the ultrasonic sensor let the buzzer issue prompt sound of different frequency according to different distance value.
+
+## Connect
+
+| T-Board Name | physical | wiringPi | BCM  |
+| ------------ | -------- | -------- | ---- |
+| GPIO23       | Pin 16   | 4        | 23   |
+| GPIO24       | Pin 18   | 5        | 24   |
+| GPIO17       | Pin 11   | 0        | 17   |
+| SDA1         | Pin 3    |          |      |
+| SCL1         | Pin 5    |          |      |
+
+![](./img/Schematic_three_one3.png)
+
+![](./img/connect/3.1.3.png)
+
+## Code
+
+### For  C  Language User
+
+Go to the code folder compile and run.
+
+```sh
+cd ~/super-starter-kit-for-raspberry-pi/c/3.1.3/
+```
+
+```sh
+gcc 3.1.3_ReversingAlarm.c -lwiringPi
+```
+
+```sh
+sudo ./a.out
+```
+
+As the code runs, ultrasonic sensor module detects the distance to the obstacle and then displays the information about the distance on LCD1602; besides, buzzer emits warning tone whose frequency changes with the distance.
+
+<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
+    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.3_ReversingAlarm.c` or`nano 3.1.3_ReversingAlarm.py`
+</div>
+
+### For Python Language User
+
+```sh
+cd ~/super-starter-kit-for-raspberry-pi/python/
+```
+
+```sh
+sudo python3 3.1.3_ReversingAlarm.py
+```
+
+## Phenomenon
+
+![](./img/phenomenon/313.gif)

@@ -1,0 +1,279 @@
+2.1.1 Button
+=============
+
+Introduction
+------------
+
+In this lesson, we will learn how to turn on or off the LED by using a button.
+
+Components
+----------
+
+.. image:: ./img/list/list_2.1.1_Button.png
+
+**Button**
+
+Button is a common component used to control electronic devices. It is usually used as switch to connect or break circuits. Although buttons come in a variety of sizes and shapes, the one used here is a 6mm mini-button as shown in the following pictures.
+
+Two pins on the left are connected, and the one on the right is similar to the left, which is shown below:
+
+.. image:: ./img/image148.png
+
+The symbol shown as below is usually used to represent a button in circuits.
+
+.. image:: ./img/image301.png
+
+When the button is pressed, the 4 pins are connected, thus closing the circuit.
+
+Connect
+-------
+
+Use a normally open button as the input of Raspberry Pi, the connection is shown in the schematic diagram below. When the button is pressed, the GPIO18 will turn into low level (0V). We can detect the state of the GPIO18 through programming. That is, if the GPIO18 turns into low level, it means the button is pressed. You can run the corresponding code when the button is pressed, and then the LED will light up.
+
+.. note:: 
+
+    The longer pin of the LED is the anode and the shorter one is the cathode.
+
+.. image:: ./img/image302.png
+
+.. image:: ./img/image303.png
+
+.. image:: ./img/connect/2.1.1.png
+
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~
+
+Go to the code folder compile and run.
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/c/2.1.1/
+
+.. code-block:: shell
+
+   gcc 2.1.1_Button.c -lwiringPi
+
+.. code-block:: shell
+
+   sudo ./a.out
+
+After the code runs, press the button, the LED lights up; otherwise, turns off.
+
+This is the complete code
+
+.. code-block:: c
+
+    #include <wiringPi.h>    // Library for GPIO control on Raspberry Pi
+    #include <stdio.h>       // Standard input/output library
+
+    // Define GPIO pin numbers (using WiringPi numbering scheme)
+    #define LED_PIN         0    // LED connected to WiringPi pin 0
+    #define BUTTON_PIN      1    // Button connected to WiringPi pin 1
+
+    // Define logic states for better readability
+    #define LED_ON          LOW   // LED turns on when GPIO outputs LOW
+    #define LED_OFF         HIGH  // LED turns off when GPIO outputs HIGH
+    #define BUTTON_PRESSED  0     // Button reads LOW when pressed (pull-up resistor)
+    #define BUTTON_RELEASED 1     // Button reads HIGH when released
+
+    int main(void)
+    {
+        printf("Starting Button Control LED Demo...\n");
+        
+        // Initialize WiringPi library
+        // This must be called before using any GPIO functions
+        if(wiringPiSetup() == -1){
+            printf("Error: Failed to initialize WiringPi library!\n");
+            printf("Make sure you are running with proper permissions.\n");
+            return 1; 
+        }
+        
+        printf("WiringPi initialized successfully.\n");
+        
+        // Configure GPIO pins
+        pinMode(LED_PIN, OUTPUT);       // Set LED pin as output
+        pinMode(BUTTON_PIN, INPUT);     // Set button pin as input
+        
+        // Set initial state: LED off
+        digitalWrite(LED_PIN, LED_OFF);
+        printf("LED pin configured as OUTPUT, Button pin configured as INPUT.\n");
+        printf("Press the button to control the LED. Press Ctrl+C to exit.\n\n");
+        
+        // Variable to track previous button state for change detection
+        int previousButtonState = BUTTON_RELEASED;  // Assume button starts released
+        
+        // Main control loop - runs continuously
+        while(1)
+        {
+            // Read the current state of the button
+            int currentButtonState = digitalRead(BUTTON_PIN);
+            
+            // Only act when button state changes (avoid continuous printing)
+            if(currentButtonState != previousButtonState)
+            {
+                if(currentButtonState == BUTTON_PRESSED)
+                {
+                    // Turn on the LED when button is pressed
+                    digitalWrite(LED_PIN, LED_ON);
+                    printf("Button pressed - LED ON\n");
+                }
+                else
+                {
+                    // Turn off the LED when button is released
+                    digitalWrite(LED_PIN, LED_OFF);
+                    printf("Button released - LED OFF\n");
+                }
+                
+                // Update previous state for next comparison
+                previousButtonState = currentButtonState;
+            }
+            
+            // Small delay to prevent excessive CPU usage and debounce button
+            delay(50);  // 50ms delay (reduced for better responsiveness)
+        }
+        
+        // This code will never be reached due to infinite loop above
+        // But it's good practice to include cleanup code
+        return 0;
+    }
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Go to the code folder and run.
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/python
+
+.. code-block:: shell
+
+   python 2.1.1_Button.py
+
+After the code runs, press the button, the LED lights up; otherwise, turns off.
+
+This is the complete code
+
+.. code-block:: python
+
+    #!/usr/bin/env python3
+
+    import RPi.GPIO as GPIO  # Library for GPIO control on Raspberry Pi
+    import time             # Library for time delays
+    import signal           # Library for handling system signals
+    import sys              # Library for system operations
+
+    # Define GPIO pin numbers (using BCM numbering scheme)
+    # These correspond to the same physical pins as the C version:
+    # C version: LedPin 0 (WiringPi) = BCM GPIO 17 (Physical pin 11)
+    # C version: ButtonPin 1 (WiringPi) = BCM GPIO 18 (Physical pin 12)
+    LED_PIN = 17            # LED connected to GPIO 17 (Physical pin 11, WiringPi pin 0)
+    BUTTON_PIN = 18         # Button connected to GPIO 18 (Physical pin 12, WiringPi pin 1)
+
+    # Define logic states for better readability
+    LED_ON = GPIO.LOW       # LED turns on when GPIO outputs LOW
+    LED_OFF = GPIO.HIGH     # LED turns off when GPIO outputs HIGH
+    BUTTON_PRESSED = GPIO.LOW    # Button reads LOW when pressed (pull-up resistor)
+    BUTTON_RELEASED = GPIO.HIGH  # Button reads HIGH when released
+
+    def cleanup_and_exit(signal_num, frame):
+        """
+        Signal handler for graceful shutdown
+        This function is called when Ctrl+C is pressed
+        """
+        print("\nShutting down gracefully...")
+        GPIO.cleanup()  # Clean up GPIO settings
+        sys.exit(0)
+
+    def setup_gpio():
+        """
+        Initialize and configure GPIO pins
+        Returns True if successful, False otherwise
+        """
+        try:
+            # Set GPIO numbering mode to BCM
+            GPIO.setmode(GPIO.BCM)
+            
+            # Disable GPIO warnings
+            GPIO.setwarnings(False)
+            
+            # Configure GPIO pins
+            GPIO.setup(LED_PIN, GPIO.OUT)          # Set LED pin as output
+            GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Set button pin as input with pull-up
+            
+            # Set initial state: LED off
+            GPIO.output(LED_PIN, LED_OFF)
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error: Failed to initialize GPIO! {e}")
+            print("Make sure you are running with proper permissions (sudo).")
+            return False
+
+    def main():
+        """
+        Main function - entry point of the program
+        """
+        print("Starting Button Control LED Demo (Python Version)...")
+        
+        # Set up signal handler for graceful shutdown
+        signal.signal(signal.SIGINT, cleanup_and_exit)
+        
+        # Initialize GPIO
+        if not setup_gpio():
+            return 1
+        
+        print("GPIO initialized successfully.")
+        print(f"LED pin (GPIO {LED_PIN}) configured as OUTPUT, Button pin (GPIO {BUTTON_PIN}) configured as INPUT with pull-up.")
+        print("Hardware should match C version: LED on Physical pin 11, Button on Physical pin 12")
+        print("Press the button to control the LED. Press Ctrl+C to exit.\n")
+        
+        # Variable to track previous button state for change detection
+        previous_button_state = BUTTON_RELEASED  # Assume button starts released
+        
+        try:
+            # Main control loop - runs continuously
+            while True:
+                # Read the current state of the button
+                current_button_state = GPIO.input(BUTTON_PIN)
+                
+                # Only act when button state changes (avoid continuous printing)
+                if current_button_state != previous_button_state:
+                    
+                    if current_button_state == BUTTON_PRESSED:
+                        # Turn on the LED when button is pressed
+                        GPIO.output(LED_PIN, LED_ON)
+                        print("Button pressed - LED ON")
+                    else:
+                        # Turn off the LED when button is released
+                        GPIO.output(LED_PIN, LED_OFF)
+                        print("Button released - LED OFF")
+                    
+                    # Update previous state for next comparison
+                    previous_button_state = current_button_state
+                
+                # Small delay to prevent excessive CPU usage and debounce button
+                time.sleep(0.05)  # 50ms delay (reduced for better responsiveness)
+                
+        except KeyboardInterrupt:
+            # Handle Ctrl+C gracefully
+            cleanup_and_exit(None, None)
+        
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+            GPIO.cleanup()
+            return 1
+
+    if __name__ == "__main__":
+        # Run the main function when script is executed directly
+        exit_code = main()
+        sys.exit(exit_code if exit_code else 0)
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/211.gif
