@@ -74,13 +74,11 @@ Projects
 ---------------
 
 .. toctree::
-    draw_a_matchmaker
-    hello_mouse
-    blinking_dot
-    clickable_dot
-    clickable_color_blocks
-    inflating_the_dot
-    dot_on_the_swing
-    metronome
-    show_number
-    drag_number
+    
+    1.emoji_gen
+    2.pic_gen
+    3.pixel_art
+    4.ecg_monitor
+    5.snake_game
+    6.metronome
+    7.reaction_tester

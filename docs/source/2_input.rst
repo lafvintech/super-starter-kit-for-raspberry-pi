@@ -1,4 +1,4 @@
-2 Input (for Pi 4)
+2 Input
 ====================
 
 **2.1 Controllers**

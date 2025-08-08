@@ -37,9 +37,12 @@ A resistor is a fundamental electronic component designed to impede the flow of 
 
 .. image:: ./img/image44.png
 
-.. image:: ./img/image45.png
+.. list-table::
+   :widths: 50 50
+   :align: center
 
-.. image:: ./img/image46.png
+   * - .. image:: ./img/image45.png
+     - .. image:: ./img/image46.png
 
 To determine a resistor's value without a multimeter, you can use the color code chart. Each color on the band represents a specific digit, multiplier, or tolerance, allowing you to calculate the resistance.
 

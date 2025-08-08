@@ -1,72 +1,154 @@
+3.1.8 GAME–Guess Number
+=======================
 
-# 3.1.8 GAME– Guess Number
+Introduction
+------------
 
-## Introduction
+In this entertaining project, you'll build an electronic version of the classic "Guess the Number" game! Perfect for parties or just having fun, this interactive game challenges players to find a secret number between 0-99. Each guess narrows down the possible range until someone finds the target number.
 
-Guessing Numbers is a fun party game where you and your friends take turns inputting a number (0~99). The range will be smaller with the inputting of the number till a player answers the riddle correctly. Then the player is defeated and punished. For example, if the lucky number is 51 which the players cannot see, and the player ① inputs 50, the prompt of number range changes to 50~99; if the player ② inputs 70, the range of number can be 50~70; if the player ③ inputs 51, this player is the unlucky one. Here, we use keypad to input numbers and use LCD to output outcomes.
+**How the game works:**
+🎯 **Secret target:** The system picks a random number (hidden from players)
+🎮 **Player turns:** Take turns guessing numbers using the keypad
+📱 **Smart feedback:** The LCD shows the narrowing range after each guess
+🏆 **Winner/Loser:** Whoever guesses the exact number "wins" (or loses, depending on your rules!)
 
-## Components
+**Example game round:**
+• Secret number: 51 (hidden)
+• Player 1 guesses: 50 → Range becomes 50~99
+• Player 2 guesses: 70 → Range becomes 50~70  
+• Player 3 guesses: 51 → "You've got it!" (Game over!)
 
-![](./img/list/list_GAME_Guess_Number.png)
+**Components:** Keypad for number input + LCD for displaying results and game status
 
-## Connect
+Components
+----------
 
-| T-Board Name | physical | wiringPi | BCM     |
-| ------------ | -------- | -------- | ------- |
-| GPIO18       | Pin 12   | 1        | 18      |
-| GPIO23       | Pin 16   | 4        | 23      |
-| GPIO24       | Pin 18   | 5        | 24      |
-| GPIO25       | Pin 22   | 6        | 25      |
-| SPIMOSI      | Pin 19   | 12       | 10      |
-| GPIO22       | Pin 15   | 3        | 22      |
-| GPIO27       | Pin 13   | 2        | 27      |
-| GPIO17       | Pin 11   | 0        | 17      |
-| SDA1         | Pin 3    | SDA1(8)  | SDA1(2) |
-| SCL1         | Pin 5    | SCL1(9)  | SDA1(3) |
+.. image:: ./img/list/list_GAME_Guess_Number.png
 
-![](./img/Schematic_three_one12.png)
+Connect
+-------
 
-![](./img/connect/3.1.8.png)
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-## Code
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO18
+     - Pin 12
+     - 1
+     - 18
+   * - GPIO23
+     - Pin 16
+     - 4
+     - 23
+   * - GPIO24
+     - Pin 18
+     - 5
+     - 24
+   * - GPIO25
+     - Pin 22
+     - 6
+     - 25
+   * - SPIMOSI
+     - Pin 19
+     - 12
+     - 10
+   * - GPIO22
+     - Pin 15
+     - 3
+     - 22
+   * - GPIO27
+     - Pin 13
+     - 2
+     - 27
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - SDA1
+     - Pin 3
+     - SDA1(8)
+     - SDA1(2)
+   * - SCL1
+     - Pin 5
+     - SCL1(9)
+     - SDA1(3)
 
-### For  C  Language User
+.. image:: ./img/connect/3.1.8.png
+
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder compile and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/c/3.1.8/
-gcc 3.1.8_GAME_GuessNumber.c -lwiringPi
-sudo ./a.out
-```
+.. code-block:: shell
 
-### For  Python  Language User
+   cd ~/super-starter-kit-for-raspberry-pi/c/3.1.8/
+
+.. code-block:: shell
+
+   gcc 3.1.8_GAME_GuessNumber.c -lwiringPi
+
+.. code-block:: shell
+
+   sudo ./a.out
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/python
-python 3.1.8_GAME_GuessNumber.py
-```
+.. code-block:: shell
 
-After the program runs, there displays the initial page on the LCD:
+   cd ~/super-starter-kit-for-raspberry-pi/python
 
-```
-Welcome!
-Press A to go!
-```
+.. code-block:: shell
 
-Press 'A', and the game will start and the game page will appear on the LCD.
+   python 3.1.8_GAME_GuessNumber.py
 
-```
-Enter number:
-0 ‹point‹ 99
-```
+**Getting started - Welcome screen:**
 
-A random number 'point' is produced but not displayed on the LCD when the game starts, and what you need to do is to guess it. The number you have typed appears at the end of the first line till the final calculation is finished. (Press 'D' to start the comparation, and if the input number is larger than 10, the automatic comparation will start.)
+When you first run the program, the LCD displays a friendly welcome message:
 
-The number range of 'point' is displayed on the second line. And you must type the number within the range. When you type a number, the range narrows; if you got the lucky number luckily or unluckily, there will appear "You’ve got it!"
+.. code-block:: text
 
-## Phenomenon
+   Welcome!
+   Press A to go!
 
-![](./img/phenomenon/318.jpg)
+**Starting the game:**
+
+Press the 'A' key on your keypad to begin! The LCD will switch to the main game screen:
+
+.. code-block:: text
+
+   Enter number:
+   0 ‹point‹ 99
+
+**How to play:**
+
+🎲 **Hidden target:** The system secretly generates a random number (the "point") that you need to guess
+
+⌨️ **Enter your guess:** Type numbers using the keypad - your input appears on the first line
+
+✅ **Submit your guess:** 
+• Press 'D' to confirm your number, OR
+• For numbers ≥ 10, the system automatically processes your guess
+
+📊 **Range updates:** The second line shows the current valid range - you must guess within these limits
+
+🎯 **Winning condition:** Keep guessing until the range narrows down and you hit the exact target number
+
+🎉 **Victory message:** When you guess correctly, "You've got it!" appears on the screen
+
+**Strategy tip:** Each guess eliminates possibilities and narrows the range, so choose wisely!
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/318.jpg

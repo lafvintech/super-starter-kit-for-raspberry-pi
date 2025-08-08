@@ -93,13 +93,13 @@ Follow these steps to compile and run the LCD1602 example:
 
    .. code-block:: shell
 
-      cd ~/super-starter-kit-for-raspberry-pi/c/1.1.7/
+      cd ~/super-starter-kit-for-raspberry-pi/c/1.1.6/
 
 2. **Compile the code** (linking the wiringPi library):
 
    .. code-block:: shell
 
-      gcc 1.1.7_Lcd1602.c -lwiringPi
+      gcc 1.1.6_Lcd1602.c -lwiringPi
 
 3. **Run the program** (requires sudo for hardware access):
 
@@ -307,7 +307,7 @@ Follow these steps to run the Python version of the LCD1602 example:
 
    .. code-block:: shell
 
-      sudo python 1.1.7_Lcd1602.py
+      sudo python 1.1.6_Lcd1602.py
 
 **Understanding the Python Code**
 

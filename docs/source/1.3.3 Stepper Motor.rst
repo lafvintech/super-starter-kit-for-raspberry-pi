@@ -109,17 +109,17 @@ Go to the code folder compile and run.
 
 .. code-block:: shell
 
-cd ~/super-starter-kit-for-raspberry-pi/c/1.3.2/
+    cd ~/super-starter-kit-for-raspberry-pi/c/1.3.2/
 
 .. code-block:: shell
 
-gcc 1.3.3_StepperMotor.c -lwiringPi
+    gcc 1.3.3_StepperMotor.c -lwiringPi
 
 .. code-block:: shell
 
-sudo ./a.out
+    sudo ./a.out
 
-As the code runs, the stepper motor will rotate clockwise or anticlockwise according to your input 'a' or 'c'.
+As the code runs, the stepper motor will automatically rotate one full revolution clockwise, pause, then rotate one full revolution anticlockwise, and repeat this cycle continuously.
 
 This is the complete code
 
@@ -222,10 +222,6 @@ This is the complete code
         return 0; // Unreachable code.
     }
 
-
-
-
-
 For Python Language User
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -233,13 +229,13 @@ Go to the code folder and run.
 
 .. code-block:: shell
 
-cd ~/super-starter-kit-for-raspberry-pi/python
+    cd ~/super-starter-kit-for-raspberry-pi/python
 
 .. code-block:: shell
 
-python 1.3.3_StepperMotor.py
+    python 1.3.3_StepperMotor.py
 
-As the code runs, the stepper motor will rotate clockwise or anticlockwise according to your input 'a' or 'c'.
+As the code runs, the stepper motor will automatically rotate one full revolution clockwise, pause, then rotate one full revolution anticlockwise, and repeat this cycle continuously.
 
 This is the complete code
 

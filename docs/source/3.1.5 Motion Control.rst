@@ -1,56 +1,120 @@
+3.1.5 Motion Control
+====================
 
+Introduction
+------------
 
-# 3.1.5 Motion Control
+In this exciting project, you'll create a motion-controlled motor system that responds to tilting movements! The MPU6050 motion sensor is mounted on your breadboard setup, and you can control a stepper motor by carefully tilting the entire breadboard. Think of it like magic - tilt the breadboard left and the motor spins one way, tilt right and it spins the other way! This is the same technology used in VR controllers, game controllers, and motion-controlled devices.
 
-## Introduction
+Components
+----------
 
-In this lesson, we will make a simple motion sensing and controlling device. The MPU6050 is used as a sensor and the stepper motor as a controlled device. With the MPU6050 mounted on the glove, you can control the stepper motor by rotating your wrist.
+.. image:: ./img/list/list_Motion_Control.png
 
-## Components
+Connect
+-------
 
-![](./img/list/list_Motion_Control.png)
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-## Connect
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO18
+     - Pin 12
+     - 1
+     - 18
+   * - GPIO23
+     - Pin 16
+     - 4
+     - 23
+   * - GPIO24
+     - Pin 18
+     - 5
+     - 24
+   * - GPIO25
+     - Pin 22
+     - 6
+     - 25
+   * - SDA1
+     - Pin 3
+     - 
+     - 
+   * - SCL1
+     - Pin 5
+     - 
+     - 
 
-| T-Board Name | physical | wiringPi | BCM  |
-| ------------ | -------- | -------- | ---- |
-| GPIO18       | Pin 12   | 1        | 18   |
-| GPIO23       | Pin 16   | 4        | 23   |
-| GPIO24       | Pin 18   | 5        | 24   |
-| GPIO25       | Pin 22   | 6        | 25   |
-| SDA1         | Pin 3    |          |      |
-| SCL1         | Pin 5    |          |      |
+.. image:: ./img/connect/3.1.5.png
 
-![](./img/Schematic_three_one6.png)
+Code
+----
 
-![](./img/connect/3.1.5.png)
-
-## Code
-
-### For  C  Language User
+For C Language User
+~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder compile and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/c/3.1.5/
-gcc 3.1.5_MotionControl.c -lwiringPi -lm
-sudo ./a.out
-```
-As the code runs, if the tilt angle of **mpu6050** on the Y-axis is larger than **45** ℃, the stepper motor rotates anticlockwise; if less than **-45** ℃, the stepper motor rotates clockwise.
+.. code-block:: shell
 
-<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
-    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.5_MotionControl.c`or`nano 3.1.5_MotionControl.py`
-</div>
+   cd ~/super-starter-kit-for-raspberry-pi/c/3.1.5/
 
-### For Python Language User
+.. code-block:: shell
 
-```python
-cd ~/super-starter-kit-for-raspberry-pi/Python/
-python 3.1.5_MotionControl.py
-```
+   gcc 3.1.5_MotionControl.c -lwiringPi -lm
 
-As the code runs, if the tilt angle of **mpu6050** on the Y-axis is larger than **45** ℃, the stepper motor rotates anticlockwise; if less than **-45** ℃, the stepper motor rotates clockwise.
+.. code-block:: shell
 
-## Phenomenon
+   sudo ./a.out
 
-![](./img/phenomenon/315.jpg)
+**How motion control works:**
+
+Once your program is running, the system responds to tilting the breadboard:
+
+📋 **Tilt the breadboard LEFT (more than 45°):** 
+   → Stepper motor rotates counterclockwise
+
+📋 **Tilt the breadboard RIGHT (more than 45°):**
+   → Stepper motor rotates clockwise  
+
+📋 **Keep the breadboard level (between -45° and +45°):**
+   → Motor stays still
+
+It's like having a motion-sensitive control system built into your project!
+
+.. tip::
+
+   **Curious about the code?** Use ``nano 3.1.5_MotionControl.c`` or ``nano 3.1.5_MotionControl.py`` to see how motion sensing translates into motor control!
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/Python/
+
+.. code-block:: shell
+
+   python 3.1.5_MotionControl.py
+
+**How motion control works:**
+
+Once your program is running, the system responds to tilting the breadboard:
+
+📋 **Tilt the breadboard LEFT (more than 45°):** 
+   → Stepper motor rotates counterclockwise
+
+📋 **Tilt the breadboard RIGHT (more than 45°):**
+   → Stepper motor rotates clockwise  
+
+📋 **Keep the breadboard level (between -45° and +45°):**
+   → Motor stays still
+
+It's like having a motion-sensitive control system built into your project!
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/315.jpg

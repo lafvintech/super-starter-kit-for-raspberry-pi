@@ -92,15 +92,15 @@ Go to the code folder compile and run.
 
 .. code-block:: shell
 
-cd ~/super-starter-kit-for-raspberry-pi/c/1.1.3/
+   cd ~/super-starter-kit-for-raspberry-pi/c/1.1.3/
 
 .. code-block:: shell
 
-gcc 1.1.3_LedMatrix.c -lwiringPi
+   gcc 1.1.3_LedMatrix.c -lwiringPi
 
 .. code-block:: shell
 
-sudo ./a.out
+   sudo ./a.out
 
 
 After the code runs, the LED dot matrix lights up and out row by row and column by column.
@@ -303,11 +303,11 @@ Go to the code folder and run.
 
 .. code-block:: shell
 
-cd ~/super-starter-kit-for-raspberry-pi/python
+   cd ~/super-starter-kit-for-raspberry-pi/python
 
 .. code-block:: shell
    
-python 1.1.3_LedMatrix.py
+   python 1.1.3_LedMatrix.py
 
 This is the complete code
 

@@ -1,66 +1,119 @@
+3.1.1 Counting Device
+======================
 
-# 3.1.1 Counting Device
+Introduction
+------------
 
-## Introduction
+In this beginner-friendly project, you'll build an automatic people counter that works like the ones you see in stores or buildings! We'll combine a PIR motion sensor (which detects when someone walks by) with a 4-digit display (which shows the count). Every time someone passes in front of the sensor, the number on the display increases by 1. This is perfect for counting visitors, monitoring foot traffic, or creating an attendance system.
 
-Here we will make a number-displaying counter system, consisting of a PIR sensor and a 4-digit segment display. When the PIR detects that someone is passing by, the number on the 4-digit segment display will add 1. You can use this counter to count the number of people walking through the passageway.
+Components
+----------
 
-## Components
-![list_Counting_Device1](./img/list/list_Counting_Device1.png)
-![list_Counting_Device2](./img/list/list_Counting_Device2.png)
+.. image:: ./img/list/list_Counting_Device1.png
 
-## Connect
+.. image:: ./img/list/list_Counting_Device2.png
 
-| T-Board Name | physical | wiringPi | BCM  |
-| ------------ | :------- | -------- | ---- |
-| GPIO17       | Pin 11   | 0        | 17   |
-| GPIO27       | Pin 13   | 2        | 27   |
-| GPIO22       | Pin 15   | 3        | 22   |
-| SPIMOSI      | Pin 19   | 12       | 10   |
-| GPIO18       | Pin 12   | 1        | 18   |
-| GPIO23       | Pin 16   | 4        | 23   |
-| GPIO24       | Pin 18   | 5        | 24   |
-| GPIO26       | Pin 37   | 25       | 26   |
+Connect
+-------
 
-![](./img/Schematic_three_one1.png)
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-![](./img/connect/3.1.1.png)
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - GPIO27
+     - Pin 13
+     - 2
+     - 27
+   * - GPIO22
+     - Pin 15
+     - 3
+     - 22
+   * - SPIMOSI
+     - Pin 19
+     - 12
+     - 10
+   * - GPIO18
+     - Pin 12
+     - 1
+     - 18
+   * - GPIO23
+     - Pin 16
+     - 4
+     - 23
+   * - GPIO24
+     - Pin 18
+     - 5
+     - 24
+   * - GPIO26
+     - Pin 37
+     - 25
+     - 26
 
-<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
-    NOTE: The PIR sensor will have a one-minute initialization time after powering on. During this period, infrared signals should be avoided, otherwise the measurement may be inaccurate.
-</div>
+.. image:: ./img/connect/3.1.1.png
 
-## Code
+.. note:: 
 
-### For  C  Language User
+   **Important Setup Tip:** When you first power on the PIR sensor, it needs about 1 minute to "warm up" and calibrate itself. During this time, try to stay away from the sensor and avoid moving in front of it, as this can make the sensor less accurate later. Just be patient and let it initialize!
+
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder compile and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/c/3.1.1/
-gcc 3.1.1_CountingDevice.c -lwiringPi
-sudo ./a.out
-```
+.. code-block:: shell
 
-<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
-    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.1_CountingDevice.c`.
-</div>
+   cd ~/super-starter-kit-for-raspberry-pi/c/3.1.1/
 
-After the code runs, when the PIR detects that someone is passing by, the number on the 4-digit segment display will add 1.
+.. code-block:: shell
 
-### For  Python  Language User
+   gcc 3.1.1_CountingDevice.c -lwiringPi
+
+.. code-block:: shell
+
+   sudo ./a.out
+
+.. tip:: 
+   
+   **Want to see the full code?** Use the command ``nano 3.1.1_CountingDevice.c`` to view and study the complete program!
+
+**How it works:** Once your program is running, every time the PIR sensor detects motion (someone walking by), the counter on the 4-digit display will automatically increase by 1. It's like having an electronic doorman counting everyone who passes!
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/python
-python 3.1.1_CountingDevice.py
-```
+.. code-block:: shell
 
-After the code runs, when the PIR detects that someone is passing by, the number on the 4-digit segment display will add 1.
+   cd ~/super-starter-kit-for-raspberry-pi/python
 
-TIP：There are two potentiometers on the PIR module: one is to adjust sensitivity and the other is to adjust the detection distance. To make the PIR module work better, you You need to turn both of them counterclockwise to the end.
+.. code-block:: shell
 
-## Phenomenon
+   python 3.1.1_CountingDevice.py
 
-![](./img/phenomenon/311.jpg)
+**How it works:** Once your program is running, every time the PIR sensor detects motion (someone walking by), the counter on the 4-digit display will automatically increase by 1. It's like having an electronic doorman counting everyone who passes!
+
+.. tip:: 
+
+   **Fine-tuning your PIR sensor:** Your PIR module has two small knobs (potentiometers) that you can adjust:
+   
+   - **Sensitivity knob:** Controls how easily it detects motion
+   - **Distance knob:** Controls how far away it can detect people
+   
+   **For best results:** Turn both knobs fully counterclockwise (all the way to the left). This makes the sensor most sensitive and gives it the longest detection range, so it won't miss anyone walking by!
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/311.jpg

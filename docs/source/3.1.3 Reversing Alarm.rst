@@ -1,65 +1,107 @@
+3.1.3 Reversing Alarm
+=====================
 
+Introduction
+------------
 
-# 3.1.3 Reversing Alarm
+In this beginner-friendly project, you'll build your own parking sensor system just like the ones in modern cars! Using an ultrasonic sensor (acts like electronic "eyes"), an LCD display (shows distance), and a buzzer (makes warning beeps), you'll create a complete reverse assist system. This is perfect for adding to RC cars, robots, or just learning how parking sensors work in real vehicles.
 
-## Introduction
+Components
+----------
 
-In this project, we will use LCD, buzzer and ultrasonic sensors to make a reverse assist system. We can put it on the remote control vehicle to simulate the actual process of reversing the car into the garage.
+.. image:: ./img/list/list_Reversing_Alarm.png
 
-## Components
+**How your parking sensor works:**
 
-![](./img/list/list_Reversing_Alarm.png)
+🔍 **Ultrasonic Sensor:** Acts as electronic "eyes" that measure the distance to obstacles (walls, objects, etc.)
 
-Ultrasonic sensor detects the distance between itself and the obstacle that will be displayed on the LCD in the form of code. At the same time, the ultrasonic sensor let the buzzer issue prompt sound of different frequency according to different distance value.
+📺 **LCD Display:** Shows the exact distance in an easy-to-read format, so you know precisely how far away obstacles are
 
-## Connect
+🔊 **Smart Buzzer:** Changes its beeping pattern based on distance:
+- **Far away:** Slow, quiet beeps (or no sound)
+- **Getting closer:** Faster beeps 
+- **Very close:** Rapid, urgent beeping (Watch out!)
 
-| T-Board Name | physical | wiringPi | BCM  |
-| ------------ | -------- | -------- | ---- |
-| GPIO23       | Pin 16   | 4        | 23   |
-| GPIO24       | Pin 18   | 5        | 24   |
-| GPIO17       | Pin 11   | 0        | 17   |
-| SDA1         | Pin 3    |          |      |
-| SCL1         | Pin 5    |          |      |
+Connect
+-------
 
-![](./img/Schematic_three_one3.png)
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-![](./img/connect/3.1.3.png)
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO23
+     - Pin 16
+     - 4
+     - 23
+   * - GPIO24
+     - Pin 18
+     - 5
+     - 24
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - SDA1
+     - Pin 3
+     - 
+     - 
+   * - SCL1
+     - Pin 5
+     - 
+     - 
 
-## Code
+.. image:: ./img/connect/3.1.3.png
 
-### For  C  Language User
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder compile and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/c/3.1.3/
-```
+.. code-block:: shell
 
-```sh
-gcc 3.1.3_ReversingAlarm.c -lwiringPi
-```
+   cd ~/super-starter-kit-for-raspberry-pi/c/3.1.3/
 
-```sh
-sudo ./a.out
-```
+.. code-block:: shell
 
-As the code runs, ultrasonic sensor module detects the distance to the obstacle and then displays the information about the distance on LCD1602; besides, buzzer emits warning tone whose frequency changes with the distance.
+   gcc 3.1.3_ReversingAlarm.c -lwiringPi
 
-<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
-    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.3_ReversingAlarm.c` or`nano 3.1.3_ReversingAlarm.py`
-</div>
+.. code-block:: shell
 
-### For Python Language User
+   sudo ./a.out
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/python/
-```
+**How it works in action:**
 
-```sh
-sudo python3 3.1.3_ReversingAlarm.py
-```
+Once your program starts running:
 
-## Phenomenon
+1. **Distance Detection:** The ultrasonic sensor continuously measures how far away obstacles are
+2. **Visual Feedback:** The LCD1602 display shows the exact distance in real-time 
+3. **Audio Alerts:** The buzzer provides audio warnings that change based on how close you are to obstacles
 
-![](./img/phenomenon/313.gif)
+The closer you get to an obstacle, the faster and more urgent the beeping becomes - just like a real car parking sensor!
+
+.. warning::
+
+   **Want to study the code?** Use ``nano 3.1.3_ReversingAlarm.c`` or ``nano 3.1.3_ReversingAlarm.py`` to see how distance measurement and audio feedback work together!
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/python/
+
+.. code-block:: shell
+
+   sudo python3 3.1.3_ReversingAlarm.py
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/313.gif

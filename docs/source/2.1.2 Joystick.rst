@@ -5,55 +5,92 @@
 Introduction
 ------------
 
-In this project, We're going to learn how joystick works. We manipulate the Joystick and display the results on the screen.
+In this beginner-friendly project, you'll learn how a joystick works by moving it around and seeing the results displayed on your screen. This will teach you about analog inputs and how to read position data.
 
 Components
 ----------
 
 .. image:: ./img/list/list_2.1.2.png
 
-**ADS7830**
+**What is ADS7830?**
 
-The ADS7830 is a single-supply, low-power, 8-bit data acquisition device that features a serial I2C interface and an 8-channel multiplexer. The following table is the pin definition diagram of ADS7830.
+The ADS7830 is a special chip that helps your Raspberry Pi read analog signals. Think of it as a translator - it converts the continuous voltage signals from the joystick into digital numbers that your computer can understand.
+
+Key features for beginners:
+- It can read 8 different analog inputs
+- It uses I2C communication (a simple 2-wire protocol)
+- It provides 8-bit resolution (values from 0 to 255)
 
 .. image:: ./img/ADS7830_Module.png
 
-**ADC**
+**Understanding ADC (Analog-to-Digital Converter)**
 
-An ADC is an electronic integrated circuit used to convert analog signals such as voltages to digital or
-binary form consisting of 1s and 0s. The range of our ADC module is 8 bits, that means the resolution is
-2^8=256, so that its range (at 3.3V) will be divided equally to 256 parts.
-Any analog value can be mapped to one digital value using the resolution of the converter. So the more bits
-the ADC has, the denser the partition of analog will be and the greater the precision of the resulting conversion.
+**What does ADC do?**
+An ADC converts analog signals (like the smooth movement of a joystick) into digital numbers that computers can work with.
+
+**How does it work?**
+Our ADC has 8-bit resolution, which means it can produce 256 different values (2^8 = 256). It takes the 3.3V input range and divides it into 256 equal parts:
 
 .. image:: ./img/ADC_S.png
 
-Subsection 1: the analog in range of 0V-3.3/256 V corresponds to digital 0;
+**Simple breakdown:**
+- **Range 1:** 0V to 3.3/256V = Digital value 0
+- **Range 2:** 3.3/256V to 2×3.3/256V = Digital value 1
+- **Range 3:** 2×3.3/256V to 3×3.3/256V = Digital value 2
+- And so on...
 
-Subsection 2: the analog in range of 3.3 /256 V-2*3.3 /256V corresponds to digital 1;
+**Why does this matter?**
+The more bits an ADC has, the more precise it becomes. With 8 bits, we get 256 different positions - that's pretty good for detecting joystick movement!
 
-...
+**What is a Joystick?**
 
-The resultant analog signal will be divided accordingly.
+A joystick is like a mini steering wheel that can move in all directions. It translates the physical movement of a stick into electrical signals that your computer can read.
 
-**Joystick**
+**How does it work?**
+- **X-axis:** Measures left-to-right movement
+- **Y-axis:** Measures up-and-down movement  
+- **Z-axis:** Detects when you press the joystick down like a button
 
-The basic idea of a joystick is to translate the movement of a stick into electronic information that a computer can process.
+Think of it like a coordinate system in math class - any position can be described using X and Y coordinates!
 
-In order to communicate a full range of motion to the computer, a joystick needs to measure the stick's position on two axes – the X-axis (left to right) and the Y-axis (up and down). Just as in basic geometry, the X-Y coordinates pinpoint the stick's position exactly.
-
-To determine the location of the stick, the joystick control system simply monitors the position of each shaft. The conventional analog joystick design does this with two potentiometers, or variable resistors.
-
-The joystick also has a digital input that is actuated when the joystick is pressed down.
+**The magic inside:**
+The joystick uses two potentiometers (variable resistors) - one for each axis. As you move the stick, these potentiometers change their resistance, which changes the voltage output.
 
 .. image:: ./img/image318.png
 
-When the data of joystick is read, there are some differents between axis: data of X and Y axis is analog, which need to use ADC0834 to convert the analog value to digital value. Data of Z axis is digital, so you can directly use the GPIO to read, or you can also use ADC to read.
+**Reading Joystick Data - The Three Types:**
+
+1. **X and Y-axis data:** These are analog signals (smooth, continuous values) that need the ADS7830 to convert them to digital numbers
+2. **Z-axis data:** This is a simple digital signal (pressed = 0, not pressed = 1) that can be read directly by a GPIO pin
+
+**Beginner tip:** The joystick essentially gives you three pieces of information - where it's pointing horizontally (X), where it's pointing vertically (Y), and whether it's being pressed down (Z)!
 
 Connect
 -------
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-.. image:: ./img/image319.png
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - GPIO28
+     - Pin 12
+     - 1
+     - 18
+   * - GPIO27
+     - Pin 13
+     - 2
+     - 27
+   * - GPIO22
+     - Pin 15
+     - 3
+     - 22
 
 .. image:: ./img/connect/2.1.2.png
 
@@ -68,7 +105,13 @@ Go to the code folder compile and run.
 .. code-block:: shell
 
    cd ~/super-starter-kit-for-raspberry-pi/c/2.1.2/
-   gcc 2.1.2_Joystick.c -lwiringPi
+
+.. code-block:: shell
+
+   g++ 2.1.2_Joystick.cpp -I ../Lib/ADCDevice -L ../Lib/ADCDevice -lADCDevice -lwiringPi
+
+.. code-block:: shell
+
    sudo ./a.out
 
 After the code runs, turn the Joystick, then the corresponding values of x, y, Btn are displayed on screen.
@@ -77,7 +120,43 @@ This is the complete code
 
 .. code-block:: c
 
-    xxxx
+    #include <wiringPi.h>
+    #include <stdio.h>
+    #include <softPwm.h>
+    #include <ADCDevice.hpp>
+
+    #define Z_Pin 1     //define pin for axis Z
+
+    ADCDevice *adc;  // Define an ADC Device class object
+
+    int main(void){
+        adc = new ADCDevice();
+        printf("Program is starting ... \n");
+        
+        if(adc->detectI2C(0x48)){// Detect the ads7830
+            delete adc;               // Free previously pointed memory
+            adc = new ADS7830();      // If detected, create an instance of ADS7830.
+        }
+        else{
+            printf("No correct I2C address found, \n"
+            "Please use command 'i2cdetect -y 1' to check the I2C address! \n"
+            "Program Exit. \n");
+            return -1;
+        }    
+        wiringPiSetup();    
+        pinMode(Z_Pin,INPUT);       //set Z_Pin as input pin and pull-up mode
+        pullUpDnControl(Z_Pin,PUD_UP);    
+        while(1){
+            int val_Z = digitalRead(Z_Pin);  //read digital value of axis Z
+            int val_Y = adc->analogRead(0);      //read analog value of axis X and Y
+            int val_X = adc->analogRead(1);
+            printf("val_X: %d  ,\tval_Y: %d  ,\tval_Z: %d \n",val_X,val_Y,val_Z);
+            delay(100);
+        }
+        return 0;
+    }
+
+
 
 For Python Language User
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,6 +166,9 @@ Go to the code folder and run.
 .. code-block:: shell
 
    cd ~/super-starter-kit-for-raspberry-pi/python
+
+.. code-block:: shell
+
    python 2.1.2_Joystick.py
 
 After the code runs, turn the Joystick, then the corresponding values of x, y, Btn are displayed on screen.
@@ -95,7 +177,46 @@ This is the complete code
 
 .. code-block:: python
 
-    xxxx
+    #!/usr/bin/env python3
+
+    import RPi.GPIO as GPIO
+    import time
+    from ADCDevice import *
+
+    Z_Pin = 12      # define Z_Pin
+    adc = ADCDevice() # Define an ADCDevice class object
+
+    def setup():
+        global adc
+        if(adc.detectI2C(0x48)): # Detect the ads7830
+            adc = ADS7830()
+        else:
+            print("No correct I2C address found, \n"
+            "Please use command 'i2cdetect -y 1' to check the I2C address! \n"
+            "Program Exit. \n");
+            exit(-1)
+        GPIO.setmode(GPIO.BOARD)        
+        GPIO.setup(Z_Pin,GPIO.IN,GPIO.PUD_UP)   # set Z_Pin to pull-up mode
+    def loop():
+        while True:     
+            val_Z = GPIO.input(Z_Pin)       # read digital value of axis Z
+            val_Y = adc.analogRead(0)           # read analog value of axis X and Y
+            val_X = adc.analogRead(1)
+            print ('value_X: %d ,\tvlue_Y: %d ,\tvalue_Z: %d'%(val_X,val_Y,val_Z))
+            time.sleep(0.01)
+
+    def destroy():
+        adc.close()
+        GPIO.cleanup()
+        
+    if __name__ == '__main__':
+        print ('Program is starting ... ') # Program entrance
+        setup()
+        try:
+            loop()
+        except KeyboardInterrupt: # Press ctrl-c to end the program.
+            destroy()
+
 
 Phenomenon
 ----------

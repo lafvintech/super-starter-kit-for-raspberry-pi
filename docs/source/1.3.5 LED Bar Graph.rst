@@ -418,4 +418,4 @@ When you run the program, your LED Bar Graph will create a light show with three
 
 The animation below shows what you should see:
 
-.. image:: ./img/phenomenon/135.gif
+.. video:: ./img/phenomenon/135.mp4

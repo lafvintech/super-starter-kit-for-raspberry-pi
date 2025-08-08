@@ -4,39 +4,61 @@
 Introduction
 ------------
 
-In this lesson, we will learn how to turn on or off the LED by using a button.
+In this beginner-friendly lesson, you will learn how to control an LED light using a simple push button. This is a fundamental skill in electronics that teaches you about digital input and output.
 
 Components
 ----------
 
 .. image:: ./img/list/list_2.1.1_Button.png
 
-**Button**
+**What is a Button?**
 
-Button is a common component used to control electronic devices. It is usually used as switch to connect or break circuits. Although buttons come in a variety of sizes and shapes, the one used here is a 6mm mini-button as shown in the following pictures.
+A button (also called a push button or tactile switch) is one of the most basic input devices in electronics. Think of it like a doorbell button - when you press it, it completes an electrical connection, and when you release it, the connection is broken.
 
-Two pins on the left are connected, and the one on the right is similar to the left, which is shown below:
+The button we're using is a small 6mm tactile button. Here's how it works:
 
 .. image:: ./img/image148.png
 
-The symbol shown as below is usually used to represent a button in circuits.
+Looking at the button from above, you can see it has 4 metal pins. The two pins on the left side are always connected to each other, and the two pins on the right side are always connected to each other. When you press the button down, all 4 pins get connected together.
+
+In circuit diagrams, we represent a button with this symbol:
 
 .. image:: ./img/image301.png
 
-When the button is pressed, the 4 pins are connected, thus closing the circuit.
+**How does it work?**
+
+- When the button is **not pressed**: The circuit is open (broken)
+- When the button **is pressed**: The circuit is closed (complete), allowing electricity to flow
 
 Connect
 -------
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-Use a normally open button as the input of Raspberry Pi, the connection is shown in the schematic diagram below. When the button is pressed, the GPIO18 will turn into low level (0V). We can detect the state of the GPIO18 through programming. That is, if the GPIO18 turns into low level, it means the button is pressed. You can run the corresponding code when the button is pressed, and then the LED will light up.
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - GPIO18
+     - Pin 12
+     - 1
+     - 18
+
+Now let's connect our button to the Raspberry Pi. We'll use what's called a "pull-up" circuit configuration. Here's what happens:
+
+- When the button is **not pressed**: GPIO18 reads HIGH (3.3V)
+- When the button **is pressed**: GPIO18 reads LOW (0V)
+
+Our program will monitor GPIO18 and detect when it changes from HIGH to LOW, which tells us the button was pressed.
 
 .. note:: 
 
-    The longer pin of the LED is the anode and the shorter one is the cathode.
-
-.. image:: ./img/image302.png
-
-.. image:: ./img/image303.png
+    **LED Tip for Beginners:** LEDs (Light Emitting Diodes) have two legs of different lengths. The longer leg is the positive side (anode) and the shorter leg is the negative side (cathode). Always connect the longer leg to the positive voltage!
 
 .. image:: ./img/connect/2.1.1.png
 

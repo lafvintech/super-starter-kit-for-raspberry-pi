@@ -1,50 +1,94 @@
+3.1.7 Morse Code Generator
+==========================
 
-# 3.1.7 Morse Code Generator
+Introduction
+------------
 
-## Introduction
+In this fascinating communication project, you'll build your own Morse code transmitter that converts text into the classic "dot-dash" signals used by ships, planes, and emergency services! Using an LED for visual signals and a buzzer for audio signals, you'll create a device that can send secret messages or emergency signals.
 
-In this course, we will make a manual alarm device. You can replace the toggle switch with a thermistor or a photosensitive sensor to make a temperature alarm or a light alarm.
+**What is Morse Code?**
+Morse code is a historic communication method that uses short signals (dots) and long signals (dashes) to represent letters and numbers. It was invented in the 1830s and is still used today in emergency situations!
 
-## Components
+**Project expansion ideas:**
+• **Temperature alarm:** Replace manual input with a thermistor to send temperature warnings
+• **Light alarm:** Use a photoresistor to send alerts when light levels change
+• **Security system:** Create automatic alarm signals for different conditions
 
-![](./img/list/list_Morse_Code_Generator.png)
+Components
+----------
 
-## Connect
+.. image:: ./img/list/list_Morse_Code_Generator.png
 
-| T-Board Name | physical | wiringPi | BCM  |
-| ------------ | -------- | -------- | ---- |
-| GPIO17       | Pin 11   | 0        | 17   |
-| GPIO22       | Pin 15   | 3        | 22   |
+Connect
+-------
 
-![](./img/Schematic_three_one11.png)
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 25 25
 
-![](./img/connect/3.1.7.png)
+   * - T-Board Name
+     - physical
+     - wiringPi
+     - BCM
+   * - GPIO17
+     - Pin 11
+     - 0
+     - 17
+   * - GPIO22
+     - Pin 15
+     - 3
+     - 22
 
-## Code
+.. image:: ./img/connect/3.1.7.png
 
-### For  C  Language User
+Code
+----
+
+For C Language User
+~~~~~~~~~~~~~~~~~~~
 
 Go to the code folder compile and run.
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/c/3.1.11/
-gcc 3.1.7_MorseCodeGenerator.c -lwiringPi
-sudo ./a.out
-```
+.. code-block:: shell
 
-<div class="warning" style="background-color: #E7F2FA; color=#6AB0DE; padding: 10px; border: 1px solid #333; border-radius: 5px;">
-    NOTE: If you want to check the complete codes, you are suggested to use command `nano 3.1.7_MorseCodeGenerator.c` or `nano 3.1.7_MorseCodeGenerator.py`.
-</div>
+   cd ~/super-starter-kit-for-raspberry-pi/c/3.1.11/
 
-### For Python Language User
+.. code-block:: shell
 
-```sh
-cd ~/super-starter-kit-for-raspberry-pi/Python/
-python 3.1.7_MorseCodeGenerator.py
-```
+   gcc 3.1.7_MorseCodeGenerator.c -lwiringPi
 
-After the program runs, type a series of characters, and the buzzer and the LED will send the corresponding Morse code signals.
+.. code-block:: shell
 
-## Phenomenon
+   sudo ./a.out
 
-![](./img/phenomenon/317.gif)
+.. tip::
+
+   **Want to decode the programming?** Use ``nano 3.1.7_MorseCodeGenerator.c`` or ``nano 3.1.7_MorseCodeGenerator.py`` to see how text gets converted into Morse code patterns!
+
+For Python Language User
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+
+   cd ~/super-starter-kit-for-raspberry-pi/Python/
+
+.. code-block:: shell
+
+   python 3.1.7_MorseCodeGenerator.py
+
+**How your Morse code transmitter works:**
+
+Once the program starts:
+
+1. **📝 Type your message:** Enter any text or characters you want to transmit
+2. **🔄 Automatic conversion:** The system converts each letter/number into Morse code
+3. **💡 Visual signals:** The LED flashes the dot-dash pattern (short flash = dot, long flash = dash)
+4. **🔊 Audio signals:** The buzzer beeps the same pattern (short beep = dot, long beep = dash)
+5. **📡 Message sent:** Your text is now transmitted in the universal Morse code language!
+
+**Example:** Type "SOS" and you'll see/hear the famous distress signal: ••• ▬▬▬ •••
+
+Phenomenon
+----------
+
+.. image:: ./img/phenomenon/317.gif

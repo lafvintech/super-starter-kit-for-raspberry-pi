@@ -35,8 +35,6 @@ Connect
      - Pin 13
      - 2
      - 27
-     
-.. image:: ./img/rgb_led_schematic.png
 
 .. image:: ./img/connect/1.1.2.png
 
